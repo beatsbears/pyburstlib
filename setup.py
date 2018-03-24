@@ -19,7 +19,19 @@ setup(
     packages=find_packages(exclude=['tests*']),
     license='MIT License',
     install_requires=[
-        "requests>=2.12.1"
+        'attrs==17.4.0',
+        'certifi==2018.1.18',
+        'cffi==1.11.5',
+        'chardet==3.0.4',
+        'idna==2.6',
+        'pluggy==0.6.0',
+        'py==1.5.2',
+        'pycparser==2.18',
+        'PyNaCl==1.2.1',
+        'pytest==3.4.2',
+        'requests==2.18.4',
+        'six==1.11.0',
+        'urllib3==1.22'
     ],
     keywords='burst burstcoin pocc',
     python_requires='>=3.3'

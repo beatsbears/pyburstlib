@@ -8,12 +8,13 @@ pyburstlib is a python library built to allow for interactions with the Burst Wa
 
 ## Getting Started
 
+1. import the library
     $ pip install pyburstlib
+2. Add a pyburstlib.ini file
 
 ## Development
 
-    $ virtualenv .venv
-    $ virtualenv .venv3 -p $(which python3)
+    $ virtualenv .venv -p $(which python3)
     $ source ./.venv/bin/activate
     $ export PYTHONPATH=.
     $ pip install -r ./requirements.txt

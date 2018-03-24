@@ -4,7 +4,6 @@ pyburstlib
 :date: 3-18-2018
 '''
 from hashlib import sha256
-import reedsolo
 import nacl.public as curve25519 #pynacl
 
 import pyburstlib.lib.utils.converters as conv
