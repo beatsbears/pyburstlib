@@ -1,0 +1,11 @@
+*.pyc
+sandbox
+
+# virtual env
+.venv
+
+# vs code
+.vscode/
+
+# pytest 
+.pytest_cache/
