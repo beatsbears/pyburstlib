@@ -1,0 +1,14 @@
+[default]
+; Node url
+node_url = https://wallet.burst.cryptoguru.org
+; Node port
+node_port = 8125
+; Logging level
+logging_level = WARNING
+; Max retries
+max_retries = 3
+
+[test]
+node_url = http://176.9.47.157
+; Node port
+node_port = 6876

@@ -10,6 +10,7 @@ base_config = {
     'wait_timeout': environ.get('TEST_WAIT_TIMEOUT', '300'),
     'node_url': environ.get('NODE_URL', 'http://176.9.47.157'),
     'node_port': environ.get('NODE_PORT', 6876),
+    'account_pw': environ.get('PYBURSTLIB_ACCOUNT_PW', '')
 }
 
 # Read pyburstlib.ini config and defaults to environment variables if available

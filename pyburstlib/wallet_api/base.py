@@ -13,3 +13,6 @@ class BaseRequest(object):
 
     def as_payload(self):
         return json.dumps(self.__dict__)
+    
+    def as_dict(self):
+        return self.__dict__

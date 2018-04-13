@@ -14,7 +14,7 @@ class AccountsWithRewardRecipient(BaseModel):
         self.accounts = accounts
         self.requestProcessingTime = requestProcessingTime
 
-class BlockChainStatus(BaseModel):
+class BlockchainStatus(BaseModel):
     def __init__(
             self,
             lastBlock=None,
@@ -38,6 +38,36 @@ class BlockChainStatus(BaseModel):
         self.version = version
         self.lastBlockchainFeeder = lastBlockchainFeeder
 
+class TransactionSubtypes(BaseModel):
+    def __init__(
+            self,
+            description=None,
+            value=None):
+        self.description = description
+        self.value = value
+
+class TransactionTypes(BaseModel):
+    def __init__(
+            self,
+            description=None,
+            value=None,
+            subtypes=None):
+
+        self._subtypes = None
+        self.description = description
+        self.value = value
+        self.subtypes = subtypes
+    
+    @property
+    def subtypes(self):
+        return self._subtypes
+
+    @subtypes.setter
+    @BaseModel._model_list(TransactionSubtypes)
+    def subtypes(self, subtypes):
+        self._subtypes = subtypes
+
+
 class Constants(BaseModel):
     def __init__(
             self,
@@ -48,6 +78,9 @@ class Constants(BaseModel):
             peerStates=None,
             maxArbitraryMessageLength=None,
             requestTypes=None):
+        
+        self._transactionTypes = None
+
         self.maxBlockPayloadLength = maxBlockPayloadLength
         self.genesisAccountId = genesisAccountId
         self.genesisBlockId = genesisBlockId
@@ -55,6 +88,15 @@ class Constants(BaseModel):
         self.peerStates = peerStates
         self.maxArbitraryMessageLength = maxArbitraryMessageLength
         self.requestTypes = requestTypes
+    
+    @property
+    def transactionTypes(self):
+        return self._transactionTypes
+
+    @transactionTypes.setter
+    @BaseModel._model_list(TransactionTypes)
+    def transactionTypes(self, transactionTypes):
+        self._transactionTypes = transactionTypes
 
 class MiningInfo(BaseModel):
     def __init__(

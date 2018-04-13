@@ -15,7 +15,7 @@ class ServerApi(BaseApi):
         '''
 
         '''
-        response = self._client.get(uri=BASE_WALLET_PATH, 
+        response = self._client.post(uri=BASE_WALLET_PATH, 
                                    params={'requestType': 'getAccountsWithRewardRecipient',
                                            'account': account_id})
         return AccountsWithRewardRecipient.from_json(response.text)
@@ -24,15 +24,15 @@ class ServerApi(BaseApi):
         '''
 
         '''
-        response = self._client.get(uri=BASE_WALLET_PATH, 
+        response = self._client.post(uri=BASE_WALLET_PATH, 
                                     params={'requestType': 'getBlockchainStatus'})
-        return BlockChainStatus.from_json(response.text)
+        return BlockchainStatus.from_json(response.text)
     
     def get_constants(self):
         '''
 
         '''
-        response = self._client.get(uri=BASE_WALLET_PATH, 
+        response = self._client.post(uri=BASE_WALLET_PATH, 
                                     params={'requestType': 'getConstants'})
         return Constants.from_json(response.text)
 
@@ -40,7 +40,7 @@ class ServerApi(BaseApi):
         '''
 
         '''
-        response = self._client.get(uri=BASE_WALLET_PATH, 
+        response = self._client.post(uri=BASE_WALLET_PATH, 
                                     params={'requestType': 'getMiningInfo'})
         return MiningInfo.from_json(response.text)
     
@@ -48,7 +48,7 @@ class ServerApi(BaseApi):
         '''
 
         '''
-        response = self._client.get(uri=BASE_WALLET_PATH, 
+        response = self._client.post(uri=BASE_WALLET_PATH, 
                                     params={'requestType': 'getMyInfo'})
         return MyInfo.from_json(response.text)
 
@@ -56,7 +56,7 @@ class ServerApi(BaseApi):
         '''
         Peer is specified by IPv4 String or as IPv6 inside brackets
         '''
-        response = self._client.get(uri=BASE_WALLET_PATH, 
+        response = self._client.post(uri=BASE_WALLET_PATH, 
                                     params={'requestType': 'getPeer',
                                             'peer': peer})
         return Peer.from_json(response.text)
@@ -66,7 +66,7 @@ class ServerApi(BaseApi):
         defaults to active peers
         state appears not to work in my testing
         '''
-        response = self._client.get(uri=BASE_WALLET_PATH, 
+        response = self._client.post(uri=BASE_WALLET_PATH, 
                                     params={'requestType': 'getPeers',
                                             'active': active,
                                             'state': state})
@@ -76,7 +76,7 @@ class ServerApi(BaseApi):
         '''
 
         '''
-        response = self._client.get(uri=BASE_WALLET_PATH, 
+        response = self._client.post(uri=BASE_WALLET_PATH, 
                                    params={'requestType': 'getRewardRecipient',
                                            'account': account_id})
         return RewardRecipient.from_json(response.text)
@@ -85,7 +85,7 @@ class ServerApi(BaseApi):
         '''
 
         '''
-        response = self._client.get(uri=BASE_WALLET_PATH, 
+        response = self._client.post(uri=BASE_WALLET_PATH, 
                                    params={'requestType': 'getState'})
         return State.from_json(response.text)
     
@@ -93,6 +93,6 @@ class ServerApi(BaseApi):
         '''
 
         '''
-        response = self._client.get(uri=BASE_WALLET_PATH, 
+        response = self._client.post(uri=BASE_WALLET_PATH, 
                                     params={'requestType': 'getTime'})
         return Time.from_json(response.text)
