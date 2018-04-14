@@ -8,48 +8,49 @@ from pyburstlib.wallet_api.models.accounts import *
 from tests.base import BaseTest
 from tests.config import PyBurstLibConfig
 
-TEST_ACCOUNT_NUMERIC = PyBurstLibConfig.get('account_id')
-TEST_ACCOUNT_ADDRESS = PyBurstLibConfig.get('account_address')
-
 @pytest.mark.api
 class TestAccountsApi(BaseTest):
 
+    def setup(self):
+        self.TEST_ACCOUNT_NUMERIC = PyBurstLibConfig.get('account_id')
+        self.TEST_ACCOUNT_ADDRESS = PyBurstLibConfig.get('account_address')
+
     def test_accounts_get_account(self, client):
-        account = client.wallet_accounts_api.get_account(account_id=TEST_ACCOUNT_NUMERIC)
+        account = client.wallet_accounts_api.get_account(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert account is not None
         assert isinstance(account, Account)
-        assert account.account == TEST_ACCOUNT_NUMERIC
+        assert account.account == self.TEST_ACCOUNT_NUMERIC
 
     def test_accounts_get_account_ATs(self, client):
-        account_ATs = client.wallet_accounts_api.get_account_ATs(account_id=TEST_ACCOUNT_NUMERIC)
+        account_ATs = client.wallet_accounts_api.get_account_ATs(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(account_ATs, AccountATs)
 
     def test_accounts_get_account_block_ids(self, client):
-        account_block_ids = client.wallet_accounts_api.get_account_block_ids(account_id=TEST_ACCOUNT_NUMERIC)
+        account_block_ids = client.wallet_accounts_api.get_account_block_ids(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(account_block_ids, AccountBlockIds)
 
     def test_accounts_get_account_blocks(self, client):
-        account_blocks = client.wallet_accounts_api.get_account_blocks(account_id=TEST_ACCOUNT_NUMERIC)
+        account_blocks = client.wallet_accounts_api.get_account_blocks(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(account_blocks, AccountBlocks)
 
     def test_account_get_account_current_ask_order_ids(self, client):
-        ask_order_ids = client.wallet_accounts_api.get_account_current_ask_order_ids(account_id=TEST_ACCOUNT_NUMERIC)
+        ask_order_ids = client.wallet_accounts_api.get_account_current_ask_order_ids(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(ask_order_ids, AccountCurrentAskOrderIds)
 
     def test_account_get_account_current_ask_orders(self, client):
-        ask_orders = client.wallet_accounts_api.get_account_current_ask_orders(account_id=TEST_ACCOUNT_NUMERIC)
+        ask_orders = client.wallet_accounts_api.get_account_current_ask_orders(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(ask_orders, AccountCurrentAskOrders)
     
     def test_account_get_account_current_bid_order_ids(self, client):
-        bid_order_ids = client.wallet_accounts_api.get_account_current_bid_order_ids(account_id=TEST_ACCOUNT_NUMERIC)
+        bid_order_ids = client.wallet_accounts_api.get_account_current_bid_order_ids(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(bid_order_ids, AccountCurrentBidOrderIds)
 
     def test_account_get_account_current_bid_orders(self, client):
-        bid_orders = client.wallet_accounts_api.get_account_current_bid_orders(account_id=TEST_ACCOUNT_NUMERIC)
+        bid_orders = client.wallet_accounts_api.get_account_current_bid_orders(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(bid_orders, AccountCurrentBidOrders)
 
     def test_account_get_account_escrow_transactions(self, client):
-        escrow_trx = client.wallet_accounts_api.get_account_escrow_transactions(account_id=TEST_ACCOUNT_NUMERIC)
+        escrow_trx = client.wallet_accounts_api.get_account_escrow_transactions(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(escrow_trx, AccountEscrowTransactions)
     
     def test_account_get_account_id(self, client):
@@ -68,39 +69,39 @@ class TestAccountsApi(BaseTest):
         assert acct_id.account == acct_id2.account
     
     def test_account_get_account_lessors(self, client):
-        acct_lessors = client.wallet_accounts_api.get_account_lessors(account_id=TEST_ACCOUNT_NUMERIC)
+        acct_lessors = client.wallet_accounts_api.get_account_lessors(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(acct_lessors, AccountLessors)
     
     def test_account_get_account_public_key(self, client):
-        pub_key = client.wallet_accounts_api.get_account_public_key(account_id=TEST_ACCOUNT_NUMERIC)
+        pub_key = client.wallet_accounts_api.get_account_public_key(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(pub_key, AccountPublicKey)
 
     def test_account_get_account_subscriptions(self, client):
-        subs = client.wallet_accounts_api.get_account_subscriptions(account_id=TEST_ACCOUNT_NUMERIC)
+        subs = client.wallet_accounts_api.get_account_subscriptions(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(subs, AccountSubscriptions)
   
     def test_account_get_account_transaction_ids(self, client):
-        trx_ids = client.wallet_accounts_api.get_account_transaction_ids(account_id=TEST_ACCOUNT_NUMERIC)
+        trx_ids = client.wallet_accounts_api.get_account_transaction_ids(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(trx_ids, AccountTransactionIds)
         assert len(trx_ids.transactionIds) > 2  #Test account used must have transactions
 
     def test_account_get_account_transactions(self, client):
-        trx = client.wallet_accounts_api.get_account_transactions(account_id=TEST_ACCOUNT_NUMERIC)
+        trx = client.wallet_accounts_api.get_account_transactions(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(trx, AccountTransactions)
         assert isinstance(trx.transactions[0], TransactionJSON)
         assert len(trx.transactions) > 2 #Test account used must have transactions
     
     def test_account_get_accounts_with_reward_recipient(self, client):
-        accts = client.wallet_accounts_api.get_accounts_with_reward_recipient(account_id=TEST_ACCOUNT_NUMERIC)
+        accts = client.wallet_accounts_api.get_accounts_with_reward_recipient(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(accts, Accounts)
-        assert TEST_ACCOUNT_NUMERIC in accts.accounts
+        assert self.TEST_ACCOUNT_NUMERIC in accts.accounts
 
     def test_account_get_assets_by_issuer(self, client):
-        assets = client.wallet_accounts_api.get_assets_by_issuer(account_id=TEST_ACCOUNT_NUMERIC)
+        assets = client.wallet_accounts_api.get_assets_by_issuer(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(assets, Assets)
     
     def test_account_get_balance(self, client):
-        balance = client.wallet_accounts_api.get_balance(account_id=TEST_ACCOUNT_NUMERIC)
+        balance = client.wallet_accounts_api.get_balance(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(balance, Balance)
         assert int(balance.balanceNQT) > 0
     
@@ -109,37 +110,37 @@ class TestAccountsApi(BaseTest):
         pass
     
     def test_account_get_guaranteed_balance(self, client):
-        gbalance = client.wallet_accounts_api.get_guaranteed_balance(account_id=TEST_ACCOUNT_NUMERIC)
+        gbalance = client.wallet_accounts_api.get_guaranteed_balance(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(gbalance, GuaranteedBalance)
         assert int(gbalance.guaranteedBalanceNQT) > 0
     
     def test_account_get_reward_recipient(self, client):
-        reward_recipient = client.wallet_accounts_api.get_reward_recipient(account_id=TEST_ACCOUNT_NUMERIC)
+        reward_recipient = client.wallet_accounts_api.get_reward_recipient(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(reward_recipient, RewardRecipient)
-        assert reward_recipient.rewardRecipient == TEST_ACCOUNT_NUMERIC
+        assert reward_recipient.rewardRecipient == self.TEST_ACCOUNT_NUMERIC
     
     @pytest.mark.skip(reason='Was not able to set up subscription in testnet')
     def test_account_get_subscription(self, client):
-        sub = client.wallet_accounts_api.get_subscription(subscription=TEST_ACCOUNT_NUMERIC)
+        sub = client.wallet_accounts_api.get_subscription(subscription=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(sub, Subscription)
 
     def test_account_get_subscriptions_to_account(self, client):
-        subs = client.wallet_accounts_api.get_subscriptions_to_account(account_id=TEST_ACCOUNT_NUMERIC)
+        subs = client.wallet_accounts_api.get_subscriptions_to_account(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(subs, Subscriptions)
     
     def test_account_get_unconfirmed_transaction_ids(self, client):
-        trx_ids = client.wallet_accounts_api.get_unconfirmed_transaction_ids(account_id=TEST_ACCOUNT_NUMERIC)
+        trx_ids = client.wallet_accounts_api.get_unconfirmed_transaction_ids(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(trx_ids, UnconfirmedTransactionIds)
     
     def test_account_get_unconfirmed_transactions(self, client):
-        trx = client.wallet_accounts_api.get_unconfirmed_transactions(account_id=TEST_ACCOUNT_NUMERIC)
+        trx = client.wallet_accounts_api.get_unconfirmed_transactions(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(trx, UnconfirmedTransactions)
     
     def test_account_rs_convert(self, client):
-        acct_rs = client.wallet_accounts_api.rs_convert(account_id=TEST_ACCOUNT_NUMERIC)
+        acct_rs = client.wallet_accounts_api.rs_convert(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(acct_rs, rsConvert)
-        assert acct_rs.account == TEST_ACCOUNT_NUMERIC
-        assert acct_rs.accountRS == TEST_ACCOUNT_ADDRESS
+        assert acct_rs.account == self.TEST_ACCOUNT_NUMERIC
+        assert acct_rs.accountRS == self.TEST_ACCOUNT_ADDRESS
 
     def test_account_send_money(self, client):
         send_req = SendMoneyRequest(

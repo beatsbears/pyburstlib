@@ -8,10 +8,11 @@ from pyburstlib.wallet_api.models.server import *
 from tests.base import BaseTest
 from tests.config import PyBurstLibConfig
 
-TEST_ACCOUNT_NUMERIC = PyBurstLibConfig.get('account_id')
-
 @pytest.mark.api
 class TestServerApi(BaseTest):
+
+    def setup(self):
+        self.TEST_ACCOUNT_NUMERIC = PyBurstLibConfig.get('account_id')
 
     def test_server_get_time(self, client):
         server_time = client.wallet_server_api.get_time()
@@ -53,10 +54,10 @@ class TestServerApi(BaseTest):
         assert peer_details.lastUpdated is not None
 
     def test_server_get_reward_recipient(self, client):
-        reward_recipient = client.wallet_server_api.get_reward_recipient(TEST_ACCOUNT_NUMERIC)
+        reward_recipient = client.wallet_server_api.get_reward_recipient(self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(reward_recipient, RewardRecipient)
         assert reward_recipient.rewardRecipient is not None
         
         recipient_list = client.wallet_server_api.get_accounts_with_reward_recipient(reward_recipient.rewardRecipient)
         assert isinstance(recipient_list, AccountsWithRewardRecipient)
-        assert TEST_ACCOUNT_NUMERIC in recipient_list.accounts 
+        assert self.TEST_ACCOUNT_NUMERIC in recipient_list.accounts 

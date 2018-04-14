@@ -12,3 +12,6 @@ pyburstlib.egg-info
 
 # pytest 
 .pytest_cache/
+
+# ini
+pyburstlib.ini
