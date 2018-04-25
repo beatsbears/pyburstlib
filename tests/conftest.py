@@ -8,8 +8,6 @@ import pytest
 import shutil
 import uuid
 from tests.base import BaseTest
-from tests.config import PyBurstLibConfig
-from pyburstlib.client import BurstAPIClient
 
 class Tester:
     def __init__(self):
@@ -37,6 +35,8 @@ def tester():
 
 @pytest.fixture(scope='session')
 def client():
+    from tests.config import PyBurstLibConfig
+    from pyburstlib.client import BurstAPIClient
     test_node = PyBurstLibConfig.get('node_url')
     node_port = PyBurstLibConfig.get('node_port')
     yield BurstAPIClient(node_url=test_node, node_port=node_port)

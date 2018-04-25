@@ -7,7 +7,7 @@ import configparser
 from os import environ
 
 base_config = {
-    'wait_timeout': environ.get('TEST_WAIT_TIMEOUT', '300'),
+    'wait_timeout': environ.get('TEST_WAIT_TIMEOUT', '60'),
     'node_url': environ.get('NODE_URL', 'http://176.9.47.157'),
     'node_port': environ.get('NODE_PORT', 6876),
     'account_pw': environ.get('PYBURSTLIB_ACCOUNT_PW', '')
