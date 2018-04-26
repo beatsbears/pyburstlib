@@ -4,6 +4,7 @@ pyburstlib
 :date: 4-1-2018
 '''
 import pytest
+from random import randint
 from pyburstlib.wallet_api.models.accounts import *
 from tests.base import BaseTest
 from tests.config import PyBurstLibConfig
@@ -153,9 +154,17 @@ class TestAccountsApi(BaseTest):
         assert isinstance(send.transactionJSON, TransactionJSON)
         assert send.transactionJSON.feeNQT == SendMoneyRequest.DEFAULT_SEND_MONEY_FEE
     
-    @pytest.mark.skip(reason='Not Implimented yet')
     def test_set_account_info(self, client):
-        pass
+        test_name = 'unit-test-name-{}'.format(str(randint(0, 100)))
+        info_req = SetAccountInfoRequest(
+            name=test_name,
+            secretPhrase=PyBurstLibConfig.get('account_pw')
+        )
+        set_info = client.wallet_accounts_api.set_account_info(req=info_req.as_dict())
+        assert isinstance(set_info, SetAccountInfoResponse)
+        assert isinstance(set_info.transactionJSON, TransactionJSON)
+        assert set_info.transactionJSON.attachment.name == test_name
+        assert set_info.transactionJSON.feeNQT == SetAccountInfoRequest.DEFAULT_ACCOUNT_INFO_FEE
 
     def test_set_reward_recipient(self, client):
         reward_req = SetRewardRecipientRequest(

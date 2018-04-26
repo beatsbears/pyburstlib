@@ -298,13 +298,12 @@ class AccountsApi(BaseApi):
         response = self._client.post(uri=BASE_WALLET_PATH, params=req)
         return SendMoneyResponse.from_json(response.text)
 
-    #TODO
-    # def set_account_info(self, req: SetAccountInfoRequest=None):
-    #     '''
+    def set_account_info(self, req: SetAccountInfoRequest=None):
+        '''
 
-    #     '''
-    #     response = self._client.post(uri=BASE_WALLET_PATH, params=req)
-    #     return SetAccountInfoResponse.from_json(response.text)
+        '''
+        response = self._client.post(uri=BASE_WALLET_PATH, params=req)
+        return SetAccountInfoResponse.from_json(response.text)
 
     def set_reward_recipient(self, req: SetRewardRecipientRequest=None):
         '''

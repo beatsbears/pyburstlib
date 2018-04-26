@@ -158,9 +158,13 @@ class EncryptedMessage(BaseModel):
 class Attachment(BaseModel):
     def __init__(
             self,
+            name=None,
+            description=None,
             encryptedMessage=None):
         self._encryptedMessage = None
 
+        self.name = name
+        self.description = description
         self.encryptedMessage = encryptedMessage
     
     @property
@@ -523,5 +527,86 @@ class SetRewardRecipientResponse(BaseModel):
     def transactionJSON(self, transactionJSON):
         self._transactionJSON = transactionJSON
 
-#TODO SetAccountInfoRequest
+class SetAccountInfoRequest(BaseRequest):
+    DEFAULT_ACCOUNT_INFO_FEE = '100000000'
+    DEFAULT_ACCOUNT_INFO_DEADLINE = '1440'
+    def __init__(
+            self, 
+            name=None,
+            description=None,
+            secretPhrase=None, 
+            publicKey=None,
+            feeNQT=None, 
+            deadline=None, 
+            referencedTransactionFullHash=None, 
+            broadcast=None,
+            message=None, 
+            messageIsText=None, 
+            messageToEncrypt=None,
+            messageToEncryptIsText=None,
+            encryptedMessageData=None,
+            encryptedMessageNonce=None,
+            messageToEncryptToSelf=None,
+            messageToEncryptToSelfIsText=None,
+            encryptToSelfMessageData=None,
+            encryptToSelfMessageNonce=None,
+            recipientPublicKey=None):
 
+        assert secretPhrase is not None 
+        if (feeNQT is not None and feeNQT < SetAccountInfoRequest.DEFAULT_ACCOUNT_INFO_FEE):
+            feeNQT = SetAccountInfoRequest.DEFAULT_ACCOUNT_INFO_FEE # if fee is less than 1 BURST, set to 1
+        self.name = name
+        self.description = description
+        self.secretPhrase = secretPhrase
+        self.publicKey = publicKey
+        self.feeNQT = feeNQT if feeNQT else SetAccountInfoRequest.DEFAULT_ACCOUNT_INFO_FEE
+        self.deadline = deadline if deadline else SetAccountInfoRequest.DEFAULT_ACCOUNT_INFO_DEADLINE
+        self.referencedTransactionFullHash = referencedTransactionFullHash
+        self.broadcast = broadcast
+        self.message = message
+        self.messageIsText = messageIsText
+        self.messageToEncrypt = messageToEncrypt
+        self.messageToEncryptIsText = messageToEncryptIsText
+        self.encryptedMessageData = encryptedMessageData
+        self.encryptedMessageNonce = encryptedMessageNonce
+        self.messageToEncryptToSelf = messageToEncryptToSelf
+        self.messageToEncryptToSelfIsText = messageToEncryptToSelfIsText
+        self.encryptToSelfMessageData = encryptToSelfMessageData
+        self.encryptToSelfMessageNonce = encryptToSelfMessageNonce
+        self.recipientPublicKey = recipientPublicKey
+        self.requestType = 'setAccountInfo'
+
+        def as_payload(self):
+            return super(SetAccountInfoRequest, self).as_payload(True)
+
+class SetAccountInfoResponse(BaseModel):
+    def __init__(
+            self,
+            unsignedTransactionBytes=None,
+            transactionJSON=None,
+            broadcasted=None,
+            transactionBytes=None,
+            fullHash=None,
+            transaction=None,
+            signatureHash=None,
+            requestProcessingTime=None):
+        
+        self._transactionJSON = None
+
+        self.unsignedTransactionBytes = unsignedTransactionBytes
+        self.transactionJSON = transactionJSON
+        self.broadcasted = broadcasted
+        self.transactionBytes = transactionBytes
+        self.fullHash = fullHash
+        self.transaction = transaction
+        self.signatureHash = signatureHash
+        self.requestProcessingTime = requestProcessingTime
+
+    @property
+    def transactionJSON(self):
+        return self._transactionJSON
+
+    @transactionJSON.setter
+    @BaseModel._model(TransactionJSON)
+    def transactionJSON(self, transactionJSON):
+        self._transactionJSON = transactionJSON
