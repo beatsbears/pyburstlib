@@ -21,6 +21,7 @@ from pyburstlib.wallet_api.base import BaseRequest
 from pyburstlib.wallet_api.server import ServerApi
 from pyburstlib.wallet_api.accounts import AccountsApi
 from pyburstlib.wallet_api.utils import UtilsApi
+from pyburstlib.wallet_api.mining import MiningApi
 
 class BurstAPIClient(object):
 
@@ -47,6 +48,7 @@ class BurstAPIClient(object):
         self.wallet_server_api = ServerApi(self)
         self.wallet_accounts_api = AccountsApi(self)
         self.wallet_utils_api = UtilsApi(self)
+        self.wallet_mining_api = MiningApi(self)
 
     def _init_helpers(self):
         '''

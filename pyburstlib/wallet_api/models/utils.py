@@ -3,7 +3,6 @@ pyburstlib
 :author: drownedcoast
 :date: 4-26-2018
 '''
-import datetime
 from pyburstlib.wallet_api.models.base import BaseModel
 
 class AccountRS(BaseModel):

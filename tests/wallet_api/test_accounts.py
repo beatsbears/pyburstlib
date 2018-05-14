@@ -84,13 +84,13 @@ class TestAccountsApi(BaseTest):
     def test_account_get_account_transaction_ids(self, client):
         trx_ids = client.wallet_accounts_api.get_account_transaction_ids(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(trx_ids, AccountTransactionIds)
-        assert len(trx_ids.transactionIds) > 2  #Test account used must have transactions
+        assert len(trx_ids.transactionIds) > 1  #Test account used must have transactions
 
     def test_account_get_account_transactions(self, client):
         trx = client.wallet_accounts_api.get_account_transactions(account_id=self.TEST_ACCOUNT_NUMERIC)
         assert isinstance(trx, AccountTransactions)
         assert isinstance(trx.transactions[0], TransactionJSON)
-        assert len(trx.transactions) > 2 #Test account used must have transactions
+        assert len(trx.transactions) > 1 #Test account used must have transactions
     
     def test_account_get_accounts_with_reward_recipient(self, client):
         accts = client.wallet_accounts_api.get_accounts_with_reward_recipient(account_id=self.TEST_ACCOUNT_NUMERIC)
