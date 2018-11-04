@@ -29,7 +29,7 @@ setup(
         'pycparser==2.18',
         'PyNaCl==1.2.1',
         'pytest==3.4.2',
-        'requests==2.18.4',
+        'requests>=2.20.0',
         'six==1.11.0',
         'urllib3==1.22'
     ],
