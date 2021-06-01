@@ -31,7 +31,7 @@ setup(
         'pytest==3.4.2',
         'requests>=2.20.0',
         'six==1.11.0',
-        'urllib3==1.22'
+        'urllib3==1.26.5'
     ],
     keywords='burst burstcoin pocc',
     python_requires='>=3.3'
