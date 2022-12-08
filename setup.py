@@ -20,7 +20,7 @@ setup(
     license='MIT License',
     install_requires=[
         'attrs==17.4.0',
-        'certifi==2018.1.18',
+        'certifi==2022.12.7',
         'cffi==1.11.5',
         'chardet==3.0.4',
         'idna==2.6',
